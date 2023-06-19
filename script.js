@@ -6,7 +6,20 @@ function checkTime() {
   var isValid = isValidTime(day, month, year);
 
   var resultElement = document.getElementById("result");
-  resultElement.innerHTML = isValid ? "Valid time" : "Invalid time";
+  if (isNaN(day) || isNaN(month) || isNaN(year)) {
+    resultElement.innerHTML = "Format is invalid, please input number!";
+  } else if (day < 1) {
+    resultElement.innerHTML = "Day is invalid";
+  } else if (month > 1 || month > 12) {
+    //change logic
+    resultElement.innerHTML = "Month is invalid";
+  } else if (year < 1) {
+    resultElement.innerHTML = "Year is invalid";
+  } else if (isValid) {
+    resultElement.innerHTML = "Date is valid";
+  } else {
+    resultElement.innerHTML = "Invalid time";
+  }
 }
 
 function isValidTime(day, month, year) {
