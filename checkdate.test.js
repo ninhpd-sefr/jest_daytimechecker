@@ -1,4 +1,8 @@
 function isValidTime(day, month, year) {
+  //Validate null
+  if (day === null || month === null || year === null) {
+    return false;
+  }
   // Validate the year
   if (year < 0) {
     return false; // Year cannot be negative
@@ -10,10 +14,11 @@ function isValidTime(day, month, year) {
   }
 
   // Validate the day based on the month
-  const daysInMonth = new Date(year, month, 0).getDate(); // Get the number of days in the month
-  if (day < 1 || day > daysInMonth) {
-    return false; // Day should be between 1 and the number of days in the month
-  }
+  //Change logic here
+  // const daysInMonth = new Date(year, month, 0).getDate(); // Get the number of days in the month
+  // if (day < 1 || day > daysInMonth) {
+  //   return false; // Day should be between 1 and the number of days in the month
+  // }
 
   // Return true if the time is valid, otherwise false
   return true;
@@ -22,8 +27,34 @@ function isValidTime(day, month, year) {
 // Tests
 test("UTCID01_ReturnsTrue()", () => {
   // INPUT
-  const day = 29;
-  const month = 2;
+  const day = 1;
+  const month = 1;
+  const year = 1;
+
+  // ACTUAL
+  const result = isValidTime(day, month, year);
+
+  // ASSERT
+  expect(result).toBe(true);
+});
+
+test("UTCID02_ReturnsTrue()", () => {
+  // INPUT
+  const day = 30;
+  const month = 4;
+  const year = 2022;
+
+  // ACTUAL
+  const result = isValidTime(day, month, year);
+
+  // ASSERT
+  expect(result).toBe(true);
+});
+
+test("UTCID03_ReturnsTrue()", () => {
+  // INPUT
+  const day = 31;
+  const month = 3;
   const year = 2000;
 
   // ACTUAL
@@ -33,36 +64,10 @@ test("UTCID01_ReturnsTrue()", () => {
   expect(result).toBe(true);
 });
 
-test("UTCID02_ReturnsFalse()", () => {
-  // INPUT
-  const day = 29;
-  const month = 2;
-  const year = 2009;
-
-  // ACTUAL
-  const result = isValidTime(day, month, year);
-
-  // ASSERT
-  expect(result).toBe(false);
-});
-
-test("UTCID03_ReturnsFalse()", () => {
-  // INPUT
-  const day = 31;
-  const month = 2;
-  const year = 2020;
-
-  // ACTUAL
-  const result = isValidTime(day, month, year);
-
-  // ASSERT
-  expect(result).toBe(false);
-});
-
 test("UTCID04_ReturnsTrue()", () => {
   // INPUT
   const day = 29;
-  const month = 4;
+  const month = 2;
   const year = 2000;
 
   // ACTUAL
@@ -74,9 +79,9 @@ test("UTCID04_ReturnsTrue()", () => {
 
 test("UTCID05_ReturnsTrue()", () => {
   // INPUT
-  const day = 30;
-  const month = 3;
-  const year = 2021;
+  const day = 28;
+  const month = 2;
+  const year = 2022;
 
   // ACTUAL
   const result = isValidTime(day, month, year);
@@ -87,9 +92,9 @@ test("UTCID05_ReturnsTrue()", () => {
 
 test("UTCID06_ReturnsFalse()", () => {
   // INPUT
-  const day = 31;
-  const month = 4;
-  const year = 2020;
+  const day = 32;
+  const month = 12;
+  const year = 2022;
 
   // ACTUAL
   const result = isValidTime(day, month, year);
@@ -100,9 +105,9 @@ test("UTCID06_ReturnsFalse()", () => {
 
 test("UTCID07_ReturnsFalse()", () => {
   // INPUT
-  const day = 29;
-  const month = 2;
-  const year = 2021;
+  const day = 0;
+  const month = 3;
+  const year = 1;
 
   // ACTUAL
   const result = isValidTime(day, month, year);
@@ -115,7 +120,7 @@ test("UTCID08_ReturnsFalse()", () => {
   // INPUT
   const day = 30;
   const month = 2;
-  const year = 2026;
+  const year = 1;
 
   // ACTUAL
   const result = isValidTime(day, month, year);
@@ -124,28 +129,54 @@ test("UTCID08_ReturnsFalse()", () => {
   expect(result).toBe(false);
 });
 
-test("UTCID09_ReturnsTrue()", () => {
+test("UTCID09_ReturnsFalse()", () => {
   // INPUT
   const day = 29;
   const month = 2;
-  const year = 2020;
+  const year = 2022;
 
   // ACTUAL
   const result = isValidTime(day, month, year);
 
   // ASSERT
-  expect(result).toBe(true);
+  expect(result).toBe(false);
 });
 
-test("UTCID10_ReturnsTrue()", () => {
+test("UTCID10_ReturnsFalse()", () => {
   // INPUT
-  const day = 31;
-  const month = 3;
-  const year = 2009;
+  const day = null;
+  const month = 12;
+  const year = 2022;
 
   // ACTUAL
   const result = isValidTime(day, month, year);
 
   // ASSERT
-  expect(result).toBe(true);
+  expect(result).toBe(false);
+});
+
+test("UTCID11_ReturnsFalse()", () => {
+  // INPUT
+  const day = 28;
+  const month = null;
+  const year = 2022;
+
+  // ACTUAL
+  const result = isValidTime(day, month, year);
+
+  // ASSERT
+  expect(result).toBe(false);
+});
+
+test("UTCID12_ReturnsFalse()", () => {
+  // INPUT
+  const day = 30;
+  const month = 12;
+  const year = null;
+
+  // ACTUAL
+  const result = isValidTime(day, month, year);
+
+  // ASSERT
+  expect(result).toBe(false);
 });
